@@ -1,0 +1,96 @@
+//creating database in MySQL
+show databases;
+create database vit;
+use vit;
+create table student(
+id int,
+name varchar(25),
+marks int
+);
+insert into student values (101,'subhash',98),(102,'likitha',100);
+select * from student;
+
+
+//DatabaseConnection
+//DBConnection.java
+package connection;
+import java.sql.*;
+public class DBConnection {
+
+	public static void main(String[] args) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/vit","root","Pullthemask7$");
+			Statement stmt=con.createStatement();
+			ResultSet rs=stmt.executeQuery("select * from student");
+			while(rs.next())
+				System.out.println(rs.getInt(1)+" "+rs.getString(2)+" "+rs.getInt(3));
+			con.close();
+			}catch(Exception e) {System.out.println("Incorrect credentials");}
+
+	}
+
+}
+
+
+//CRUD
+//DB_Connection
+package crud_operation;
+import java.sql.Connection;
+import java.sql.DriverManager;
+public class DB_Connection {
+
+	public static void main(String[] args) {
+		DB_Connection obj_DB_Connection=new DB_Connection();
+		System.out.println(obj_DB_Connection.get_connection());
+
+	}
+	public Connection get_connection() {
+		Connection connection=null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/vit","root","Pullthemask7$");
+			
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		return connection;
+	}
+
+}
+
+
+//CRUD_Operation
+package crud_operation;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+public class CRUD_Operation {
+
+	public static void main(String[] args) {
+		CRUD_Operation objTest=new CRUD_Operation();
+  
+	objTest.create_data("103", "manogna", 55);
+	objTest.create_data("104", "karthik", 65);
+    
+}
+
+public void create_data(String sl_no,String name,int mark){
+	DB_Connection obj_DB_Connection=new DB_Connection();
+	Connection connection=obj_DB_Connection.get_connection();
+	PreparedStatement ps=null;
+	try {
+		String query="insert into student values (?,?,?)";
+		ps=connection.prepareStatement(query);
+		ps.setString(1, sl_no);
+		ps.setString(2, name);
+		ps.setInt(3, mark);
+		System.out.println(ps);
+		ps.executeUpdate();
+	} catch (Exception e) {
+		System.out.println(e);
+	}
+}
+
+}
