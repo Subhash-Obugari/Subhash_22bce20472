@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/client/home/home.css">
+</head>
+<body>
+    <div id="script-record">
+    </div>
+    <div class="home-page">
+        <header>
+            <li><a href="#academics">Academics</a></li>
+            <li><a href="#marks">Marks</a></li>
+            <li><a onclick="curriculum_init()">Curriculum</a></li>
+            <li>Grades</li>
+            <li><a onclick="profile_init();">My Profile</a></li>
+        </header>
+        <div class="content">
+            <section id="content">
+                
+            </section>
+        </div>
+    </div>
+    <script src="/client/home/home.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="/env.js"></script>
+</body>
+</html>
